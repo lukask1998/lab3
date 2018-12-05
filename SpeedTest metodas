@@ -1,0 +1,51 @@
+private void speedTest() throws FileNotFoundException, IOException {
+        
+    MapKTU map = new MapKTU();
+    HashSet hs = new HashSet();
+    MapKTUOA mapOA = new MapKTUOA();
+
+    BufferedReader reader; 
+    String line;
+    long startTime;
+    long endTime;
+
+    //MapKTU speed test (put)
+    reader = new BufferedReader(new FileReader("zodynas.txt"));
+    line = null;
+    startTime = System.nanoTime();
+    while ((line = reader.readLine()) != null)
+    {
+        map.put(line, line);
+    } 
+    endTime = System.nanoTime();
+    System.out.println("MapKTU metodas put užtruko: " + (endTime - startTime));
+
+    //hashSet speed test (put)
+    reader = new BufferedReader(new FileReader("zodynas.txt"));
+    line = null;
+    startTime = System.nanoTime();
+    while ((line = reader.readLine()) != null)
+    {
+        hs.add(line);
+    } 
+    endTime = System.nanoTime();
+    System.out.println("hashSet metodas put užtruko: " + (endTime - startTime));
+
+    //MapKTUOA speed test (contains)
+    reader = new BufferedReader(new FileReader("zodynas.txt"));
+    line = null; 
+    while ((line = reader.readLine()) != null)
+    {
+        mapOA.put(line, line);
+    } 
+    startTime = System.nanoTime();
+    mapOA.contains("zyzzyvas");
+    endTime = System.nanoTime();
+    System.out.println("MapKTUOA metodas contains užtruko: " + (endTime - startTime));
+
+    //MapKTU speed test (contains)       
+    startTime = System.nanoTime(); 
+    map.contains("zyzzyvas");
+    endTime = System.nanoTime();
+    System.out.println("MapKTU metodas contains užtruko: " + (endTime - startTime));
+}
